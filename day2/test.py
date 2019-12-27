@@ -13,6 +13,7 @@ import modules.intcode_computer as cpu
 list = [1, 1, 1, 4, 99, 5, 6, 0, 99]
 
 separator = ','
-ans = cpu.get_final_string(list, separator)
+instruction = 4
+ans = cpu.get_final_string(list, separator, instruction)
 
 print('Answer = ', ans)

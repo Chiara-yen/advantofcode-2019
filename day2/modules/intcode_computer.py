@@ -19,8 +19,8 @@ def get_action(type):
     raise TypeError('unknow type =', type)
 
 
-def handle_opcode(group, list):
-    if len(group) < 4:
+def handle_opcode(group, list, instruction):
+    if len(group) < instruction:
         return None
 
     [type, index0, index1, position] = group
@@ -33,15 +33,15 @@ def handle_opcode(group, list):
     return list
 
 
-def get_final_string(l, separator):
-    steps = math.floor(len(l) / 4)
+def get_final_string(l, separator, instruction):
+    steps = math.floor(len(l) / instruction)
     start = 0
     while steps > 0:
-        end = start + 4
+        end = start + instruction
         group = l[start:end]
-        result = handle_opcode(group, l)
+        result = handle_opcode(group, l, instruction)
         if result is None:
             break
-        start += 4
+        start += instruction
     string_list = list(map(str, l))
     return separator.join(string_list)

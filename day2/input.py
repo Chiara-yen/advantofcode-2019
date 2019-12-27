@@ -6,6 +6,7 @@ list[1] = 12
 list[2] = 2
 
 separator = ','
-ans = cpu.get_final_string(list, separator)
+instruction = 4
+ans = cpu.get_final_string(list, separator, instruction)
 
 print('Answer = ', ans)
