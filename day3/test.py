@@ -1,3 +1,5 @@
+import modules.manhattan_distance_computer as cpu
+
 # closet cross point (3,3) therefore, its distance is 3 + 3 = 6
 # answer should be 6
 w1 = 'R8,U5,L5,D3'
@@ -10,3 +12,7 @@ w4 = 'U62,R66,U55,R34,D71,R55,D58,R83'
 # answer should be 135
 w5 = 'R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51'
 w6 = 'U98,R91,D20,R16,D67,R40,U7,R15,U6,R7'
+
+cross_points = cpu.get_all_cross_points(w1, w2)
+d = cpu.conver_cross_points_to_distances(cross_points)
+print(min(d))
