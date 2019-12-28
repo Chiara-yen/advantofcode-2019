@@ -93,3 +93,18 @@ def conver_cross_points_to_distances(l):
     def get_distance_between_origin(
         coord): return get_distance_between((0, 0), coord)
     return map(get_distance_between_origin, l)
+
+
+def get_steps_of_a_cross_point(l, point):
+    return l.index(point) + 1
+
+
+def get_best_steps_between_coordinate_points_lists(l1, l2):
+    cross_points = intersection(l1, l2)
+    best_steps = None
+    for point in iter(cross_points):
+        s1 = get_steps_of_a_cross_point(l1, point)
+        s2 = get_steps_of_a_cross_point(l2, point)
+        if best_steps is None or s1 + s2 < best_steps:
+            best_steps = s1 + s2
+    return best_steps
