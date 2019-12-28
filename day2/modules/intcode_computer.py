@@ -33,15 +33,14 @@ def handle_opcode(group, list, instruction):
     return list
 
 
-def get_final_string(l, separator, instruction):
-    steps = math.floor(len(l) / instruction)
+def get_final_list(list, instruction):
+    steps = math.floor(len(list) / instruction)
     start = 0
     while steps > 0:
         end = start + instruction
-        group = l[start:end]
-        result = handle_opcode(group, l, instruction)
+        group = list[start:end]
+        result = handle_opcode(group, list, instruction)
         if result is None:
             break
         start += instruction
-    string_list = list(map(str, l))
-    return separator.join(string_list)
+    return list
