@@ -1,4 +1,6 @@
 
+import modules.password_computer as cpu
+
 '''
 Password criteria:
 
@@ -10,3 +12,6 @@ Password criteria:
 '''
 
 password_range = '402328-864247'
+
+list = cpu.get_possible_passwords(password_range)
+print('ans =', len(list))
