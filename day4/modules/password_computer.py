@@ -15,10 +15,29 @@ def is_in_range(passward, range):
 
 def has_adjacent_digits(passward):
     temp = None
+    digits_counts = {
+        '0': 0,
+        '1': 0,
+        '2': 0,
+        '3': 0,
+        '4': 0,
+        '5': 0,
+        '6': 0,
+        '7': 0,
+        '8': 0,
+        '9': 0,
+    }
     for i in range(len(passward)):
-        if passward[i] == temp:
-            return True
-        temp = passward[i]
+        digit = passward[i]
+        digits_counts[digit] += 1
+    counts = digits_counts.values()
+
+    if 5 in counts or 6 in counts:
+        return False
+
+    if 2 in counts:
+        return True
+
     return False
 
 
@@ -38,10 +57,10 @@ def validate(passward, range):
     if not is_in_range(passward, range):
         return False
 
-    if not has_adjacent_digits(passward):
+    if not has_increase_digits(passward):
         return False
 
-    if not has_increase_digits(passward):
+    if not has_adjacent_digits(passward):
         return False
 
     return True
