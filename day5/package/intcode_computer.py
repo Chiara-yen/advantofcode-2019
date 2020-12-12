@@ -1,4 +1,5 @@
 import math
+import re
 
 # modes
 POSITION_MODE = 0
@@ -20,7 +21,23 @@ def multiply(x, y):
     return x * y
 
 
-def handle_opcode(opcode, params, list):
+def handle_opcode_with_modes(num):
+    opcode = num % 100
+    modes = '0'
+
+    if num > 100:
+        # print('!!!!!', num)
+        modes = str((num - opcode) % 100)
+
+    # print('!!!!!', modes)
+    return [opcode, modes]
+
+
+def handle_instruction(opcode, params, list):
+    print('handle_instruction/ opcode:', opcode)
+    print('handle_instruction/ params:', params)
+    print('handle_instruction/ list:', list)
+
     if opcode is OPCODE_HALT:
         return list
 
@@ -54,7 +71,10 @@ def get_final_list(list):
     params = 0
     pointer = 0
     while pointer < len(list):
-        opcode = list[pointer]
+        opcode_with_modes = list[pointer]
+        [opcode, modes] = handle_opcode_with_modes(opcode_with_modes)
+        print('opcode: ', opcode, ' mode: ', modes)
+
         if opcode is OPCODE_HALT:
             return list
         elif opcode is OPCODE_ADD or opcode is OPCODE_MULTIPLY:
@@ -64,8 +84,13 @@ def get_final_list(list):
 
         end = (pointer + 1) + params
         params = list[pointer + 1:end]
-        result = handle_opcode(opcode, params, list)
+        result = handle_instruction(opcode, params, list)
         if opcode is OPCODE_OUTPUT:
             return result
         pointer += end
+
+        if pointer > 20:
+            raise Error('too many iter')
+            return None
+
     return list
